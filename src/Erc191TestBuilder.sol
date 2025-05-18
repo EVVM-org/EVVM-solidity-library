@@ -286,6 +286,28 @@ library Erc191TestBuilder {
     // sMate functions
     //-----------------------------------------------------------------------------------
 
+    function buildMessageSignedForPublicServiceStake(
+        address _serviceAddress,
+        bool _isStaking,
+        uint256 _amountOfSMate,
+        uint256 _nonce
+    ) internal pure returns (bytes32 messageHash) {
+        return
+            buildHashForSign(
+                string.concat(
+                    "21cc1749",
+                    ",",
+                    AdvancedStrings.addressToString(_serviceAddress),
+                    ",",
+                    _isStaking ? "true" : "false",
+                    ",",
+                    Strings.toString(_amountOfSMate),
+                    ",",
+                    Strings.toString(_nonce)
+                )
+            );
+    }
+
     function buildMessageSignedForPublicStaking(
         bool _isStaking,
         uint256 _amountOfSMate,
